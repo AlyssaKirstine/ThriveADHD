@@ -169,7 +169,7 @@ module.exports = class Profile {
           ]
         },
         {
-          title: i18n.__("menu.support"),
+          title: i18n.__("menu.mentor"),
           type: "postback",
           payload: "CURATION"
         },
