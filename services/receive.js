@@ -10,8 +10,8 @@
 
 "use strict";
 
-const MentorForm = require("./mentorForm"),
-  Order = require("./order"),
+const MenteeForm = require("./menteeForm"),
+  MentorForm = require("./mentorForm"),
   Response = require("./response"),
   Care = require("./care"),
   Survey = require("./survey"),
@@ -102,12 +102,12 @@ module.exports = class Receive {
         Response.genText(i18n.__("get_started.guidance")),
         Response.genQuickReply(i18n.__("get_started.help"), [
           {
-            title: i18n.__("menu.mentor"),
-            payload: "MENTORFORM"
+            title: i18n.__("menu.mentee"),
+            payload: "MENTEEFORM"
           },
           {
-            title: i18n.__("menu.mentee"),
-            payload: "CARE_HELP"
+            title: i18n.__("menu.mentor"),
+            payload: "MENTORFORM"
           }
         ])
       ];
@@ -126,8 +126,8 @@ module.exports = class Receive {
 
     response = Response.genQuickReply(i18n.__("fallback.attachment"), [
       {
-        title: i18n.__("menu.mentor"),
-        payload: "CARE_HELP"
+        title: i18n.__("menu.mentee"),
+        payload: "MENTEEFORM"
       },
       {
         title: i18n.__("menu.start_over"),
@@ -183,12 +183,12 @@ module.exports = class Receive {
       payload === "GITHUB"
     ) {
       response = Response.genNuxMessage(this.user);
-    } else if (payload.includes("MENTORFORM") || payload.includes("COUPON")) {
+    } else if (payload.includes("MENTEEFORM")) {
+      let menteeForm = new MenteeForm(this.user, this.webhookEvent);
+      response = menteeForm.handlePayload(payload);
+    } else if (payload.includes("MENTORFORM")) {
       let mentorForm = new MentorForm(this.user, this.webhookEvent);
       response = mentorForm.handlePayload(payload);
-    } else if (payload.includes("CARE")) {
-      let care = new Care(this.user, this.webhookEvent);
-      response = care.handlePayload(payload);
     } else if (payload.includes("ORDER")) {
       response = Order.handlePayload(payload);
     } else if (payload.includes("CSAT")) {
@@ -228,12 +228,12 @@ module.exports = class Receive {
 
     let response = Response.genQuickReply(welcomeMessage, [
       {
-        title: i18n.__("menu.mentor"),
-        payload: "MENTORFORM"
+        title: i18n.__("menu.mentee"),
+        payload: "MENTEEFORM"
       },
       {
-        title: i18n.__("menu.mentee"),
-        payload: "CARE_HELP"
+        title: i18n.__("menu.mentor"),
+        payload: "MENTORFORM"
       }
     ]);
 

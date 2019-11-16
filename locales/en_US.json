@@ -5,8 +5,8 @@
   "menu": {
     "support": "Customer Support",
     "order": "Order updates",
-    "mentee": "Help a member",
-    "mentor": "Find a member",
+    "mentee": "Find a member",
+    "mentor": "Help a member",
     "shop": "Shop now",
     "start_over": "Start over"
   },
