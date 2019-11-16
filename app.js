@@ -20,7 +20,9 @@ const express = require("express"),
   User = require("./services/user"),
   config = require("./services/config"),
   i18n = require("./i18n.config"),
-  app = express();
+  app = express(),
+  mongoose = require('mongoose'),
+  mentorRoutes = require("./routes/mentorRoutes");
 
 var users = {};
 
@@ -30,6 +32,11 @@ app.use(
     extended: true
   })
 );
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fbsf");
+
+// Use mentorRoutes
+app.use("/api", mentorRoutes);
 
 // Parse application/json. Verify that callback came from Facebook
 app.use(json({ verify: verifyRequestSignature }));
@@ -41,7 +48,7 @@ app.use(express.static(path.join(path.resolve(), "public")));
 app.set("view engine", "ejs");
 
 // Respond with index file when a GET request is made to the homepage
-app.get("/", function(_req, res) {
+app.get("/", function (_req, res) {
   res.render("index");
 });
 
@@ -76,7 +83,7 @@ app.post("/webhook", (req, res) => {
     res.status(200).send("EVENT_RECEIVED");
 
     // Iterates over each entry - there may be multiple if batched
-    body.entry.forEach(function(entry) {
+    body.entry.forEach(function (entry) {
       if ("changes" in entry) {
         // Handle Page Changes event
         let receiveMessage = new Receive();
@@ -245,7 +252,7 @@ function verifyRequestSignature(req, res, buf) {
 config.checkEnvVariables();
 
 // listen for requests :)
-var listener = app.listen(config.port, function() {
+var listener = app.listen(config.port, function () {
   console.log("Your app is listening on port " + listener.address().port);
 
   if (
@@ -255,11 +262,11 @@ var listener = app.listen(config.port, function() {
   ) {
     console.log(
       "Is this the first time running?\n" +
-        "Make sure to set the both the Messenger profile, persona " +
-        "and webhook by visiting:\n" +
-        config.appUrl +
-        "/profile?mode=all&verify_token=" +
-        config.verifyToken
+      "Make sure to set the both the Messenger profile, persona " +
+      "and webhook by visiting:\n" +
+      config.appUrl +
+      "/profile?mode=all&verify_token=" +
+      config.verifyToken
     );
   }
 

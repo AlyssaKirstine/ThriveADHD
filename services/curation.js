@@ -24,7 +24,7 @@ module.exports = class Curation {
   handlePayload(payload) {
     let response;
     let outfit;
-
+  
     switch (payload) {
       case "SUMMER_COUPON":
         response = [
@@ -230,7 +230,6 @@ module.exports = class Curation {
   randomOutfit() {
     let occasion = ["work", "party", "dinner"];
     let randomIndex = Math.floor(Math.random() * occasion.length);
-
     return occasion[randomIndex];
   }
 };
