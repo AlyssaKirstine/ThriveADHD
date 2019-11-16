@@ -23,7 +23,7 @@
     "coupon": "Added your coupon to this thread, you can now check out the discounted summer collection"
   },
   "mentor_form_about":{
-    "prompt1":"A pal is is someone who supports  others who struggle with ADHD.",
+    "prompt1":"A pal is is someone who supports others who struggle with ADHD.",
     "prompt2":"If you’re matched with a pal, they will be given access to your Facebook profile and message you there.",
     "prompt3":"Are you okay with this?",
     "yes":"Yes",
@@ -52,7 +52,7 @@
     "support":"Support",
     "helpers":"What has helped you?",
     "counseling":"Counseling",
-    "family/friend":"Family/friend",
+    "familyfriend":"Family/friend",
     "internet":"Internet",
     "medication":"Medication",
     "end1":"Thank you for sharing this information. A pal will reach out if you are matched with them",

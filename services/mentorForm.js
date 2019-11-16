@@ -23,6 +23,7 @@ module.exports = class MentorForm {
 
   handlePayload(payload) {
     let response;
+    let user;
     
     switch (payload) {
       case "MENTORFORM":
@@ -62,71 +63,351 @@ module.exports = class MentorForm {
       case "MENTORFORM_NOPAL":
           response = Response.genText(i18n.__("mentor_form_about.negative"));
 
+    // Gender
       case "MENTORFORM_GENDER_MALE":
-        // Store the user budget preference here
-        response = Response.genQuickReply(i18n.__("curation.price"), [
+        user.gender = "male";
+        response = Response.genQuickReply(i18n.__("mentor_form.age"), [
           {
-            title: "~ $20",
-            payload: "CURATION_BUDGET_20_WORK"
+            title: i18n.__("mentor_form.0-14"),
+            payload: "MENTORFORM_AGE_0-14"
           },
           {
-            title: "~ $30",
-            payload: "CURATION_BUDGET_30_WORK"
+            title: i18n.__("mentor_form.15-24"),
+            payload: "MENTORFORM_AGE_15-24"
           },
           {
-            title: "+ $50",
-            payload: "CURATION_BUDGET_50_WORK"
+            title: i18n.__("mentor_form.25-64"),
+            payload: "MENTORFORM_AGE_25-64"
+          },
+          {
+            title: i18n.__("mentor_form.65-"),
+            payload: "MENTORFORM_AGE_65-"
           }
         ]);
         break;
 
-      case "CURATION_OCASION_DINNER":
-        // Store the user budget preference here
-        response = Response.genQuickReply(i18n.__("curation.price"), [
+      case "MENTORFORM_GENDER_FEMALE":
+        user.gender = "female";
+        response = Response.genQuickReply(i18n.__("mentor_form.age"), [
           {
-            title: "~ $20",
-            payload: "CURATION_BUDGET_20_DINNER"
+            title: i18n.__("mentor_form.0-14"),
+            payload: "MENTORFORM_AGE_0-14"
           },
           {
-            title: "~ $30",
-            payload: "CURATION_BUDGET_30_DINNER"
+            title: i18n.__("mentor_form.15-24"),
+            payload: "MENTORFORM_AGE_15-24"
           },
           {
-            title: "+ $50",
-            payload: "CURATION_BUDGET_50_DINNER"
+            title: i18n.__("mentor_form.25-64"),
+            payload: "MENTORFORM_AGE_25-64"
+          },
+          {
+            title: i18n.__("mentor_form.65-"),
+            payload: "MENTORFORM_AGE_65-"
           }
         ]);
         break;
 
-      case "CURATION_OCASION_PARTY":
-        // Store the user budget preference here
-        response = Response.genQuickReply(i18n.__("curation.price"), [
+    // From age to occupation
+      case "MENTORFORM_AGE_0-14":
+        user.age = "0-14";
+        response = Response.genQuickReply(i18n.__("mentor_form.occupation"), [
           {
-            title: "~ $20",
-            payload: "CURATION_BUDGET_20_PARTY"
+            title: i18n.__("mentor_form.student"),
+            payload: "MENTORFORM_OCCUPATION_STUDENT"
           },
           {
-            title: "~ $30",
-            payload: "CURATION_BUDGET_30_PARTY"
+            title: i18n.__("mentor_form.teacher"),
+            payload: "MENTORFORM_OCCUPATION_TEACHER"
           },
           {
-            title: "+ $50",
-            payload: "CURATION_BUDGET_50_PARTY"
+            title: i18n.__("mentor_form.engineer"),
+            payload: "MENTORFORM_OCCUPATION_ENGINEER"
+          },
+          {
+            title: i18n.__("mentor_form.other"),
+            payload: "MENTORFORM_OCCUPATION_OTHER"
           }
         ]);
         break;
 
-      case "CURATION_BUDGET_20_WORK":
-      case "CURATION_BUDGET_30_WORK":
-      case "CURATION_BUDGET_50_WORK":
-      case "CURATION_BUDGET_20_DINNER":
-      case "CURATION_BUDGET_30_DINNER":
-      case "CURATION_BUDGET_50_DINNER":
-      case "CURATION_BUDGET_20_PARTY":
-      case "CURATION_BUDGET_30_PARTY":
-      case "CURATION_BUDGET_50_PARTY":
-        response = this.genCurationResponse(payload);
+        case "MENTORFORM_AGE_15-24":
+        user.age = "15-24";
+        response = Response.genQuickReply(i18n.__("mentor_form.occupation"), [
+          {
+            title: i18n.__("mentor_form.student"),
+            payload: "MENTORFORM_OCCUPATION_STUDENT"
+          },
+          {
+            title: i18n.__("mentor_form.teacher"),
+            payload: "MENTORFORM_OCCUPATION_TEACHER"
+          },
+          {
+            title: i18n.__("mentor_form.engineer"),
+            payload: "MENTORFORM_OCCUPATION_ENGINEER"
+          },
+          {
+            title: i18n.__("mentor_form.other"),
+            payload: "MENTORFORM_OCCUPATION_OTHER"
+          }
+        ]);
         break;
+
+        case "MENTORFORM_AGE_25-64":
+        user.age = "25-64";
+        response = Response.genQuickReply(i18n.__("mentor_form.occupation"), [
+          {
+            title: i18n.__("mentor_form.student"),
+            payload: "MENTORFORM_OCCUPATION_STUDENT"
+          },
+          {
+            title: i18n.__("mentor_form.teacher"),
+            payload: "MENTORFORM_OCCUPATION_TEACHER"
+          },
+          {
+            title: i18n.__("mentor_form.engineer"),
+            payload: "MENTORFORM_OCCUPATION_ENGINEER"
+          },
+          {
+            title: i18n.__("mentor_form.other"),
+            payload: "MENTORFORM_OCCUPATION_OTHER"
+          }
+        ]);
+        break;
+
+        case "MENTORFORM_AGE_65-":
+        user.age = "65-";
+        response = Response.genQuickReply(i18n.__("mentor_form.occupation"), [
+          {
+            title: i18n.__("mentor_form.student"),
+            payload: "MENTORFORM_OCCUPATION_STUDENT"
+          },
+          {
+            title: i18n.__("mentor_form.teacher"),
+            payload: "MENTORFORM_OCCUPATION_TEACHER"
+          },
+          {
+            title: i18n.__("mentor_form.engineer"),
+            payload: "MENTORFORM_OCCUPATION_ENGINEER"
+          },
+          {
+            title: i18n.__("mentor_form.other"),
+            payload: "MENTORFORM_OCCUPATION_OTHER"
+          }
+        ]);
+        break;
+
+    // From occupation to struggles
+      case "MENTORFORM_OCCUPATION_STUDENT":
+        user.occupation = "student";
+        response = Response.genQuickReply(i18n.__("mentor_form.struggles"), [
+          {
+            title: i18n.__("mentor_form.affordability"),
+            payload: "MENTORFORM_STRUGGLES_AFFORDABILITY"
+          },
+          {
+            title: i18n.__("mentor_form.concentration"),
+            payload: "MENTORFORM_STRUGGLES_CONCENTRATION"
+          },
+          {
+            title: i18n.__("mentor_form.accessibility"),
+            payload: "MENTORFORM_STRUGGLES_ACCESSIBILITY"
+          },
+          {
+            title: i18n.__("mentor_form.support"),
+            payload: "MENTORFORM_STRUGGLES_SUPPORT"
+          }
+        ]);
+        break;
+
+        case "MENTORFORM_OCCUPATION_TEACHER":
+        user.occupation = "teacher";
+        response = Response.genQuickReply(i18n.__("mentor_form.struggles"), [
+            {
+            title: i18n.__("mentor_form.affordability"),
+            payload: "MENTORFORM_STRUGGLES_AFFORDABILITY"
+            },
+            {
+            title: i18n.__("mentor_form.concentration"),
+            payload: "MENTORFORM_STRUGGLES_CONCENTRATION"
+            },
+            {
+            title: i18n.__("mentor_form.accessibility"),
+            payload: "MENTORFORM_STRUGGLES_ACCESSIBILITY"
+            },
+            {
+            title: i18n.__("mentor_form.support"),
+            payload: "MENTORFORM_STRUGGLES_SUPPORT"
+            }
+        ]);
+        break;
+
+        case "MENTORFORM_OCCUPATION_ENGINEER":
+        user.occupation = "engineer";
+        response = Response.genQuickReply(i18n.__("mentor_form.struggles"), [
+            {
+            title: i18n.__("mentor_form.affordability"),
+            payload: "MENTORFORM_STRUGGLES_AFFORDABILITY"
+            },
+            {
+            title: i18n.__("mentor_form.concentration"),
+            payload: "MENTORFORM_STRUGGLES_CONCENTRATION"
+            },
+            {
+            title: i18n.__("mentor_form.accessibility"),
+            payload: "MENTORFORM_STRUGGLES_ACCESSIBILITY"
+            },
+            {
+            title: i18n.__("mentor_form.support"),
+            payload: "MENTORFORM_STRUGGLES_SUPPORT"
+            }
+        ]);
+        break;
+
+        case "MENTORFORM_OCCUPATION_OTHER":
+        user.occupation = "other";
+        response = Response.genQuickReply(i18n.__("mentor_form.struggles"), [
+            {
+            title: i18n.__("mentor_form.affordability"),
+            payload: "MENTORFORM_STRUGGLES_AFFORDABILITY"
+            },
+            {
+            title: i18n.__("mentor_form.concentration"),
+            payload: "MENTORFORM_STRUGGLES_CONCENTRATION"
+            },
+            {
+            title: i18n.__("mentor_form.accessibility"),
+            payload: "MENTORFORM_STRUGGLES_ACCESSIBILITY"
+            },
+            {
+            title: i18n.__("mentor_form.support"),
+            payload: "MENTORFORM_STRUGGLES_SUPPORT"
+            }
+        ]);
+        break;
+
+    // From struggles to helpers
+    case "MENTORFORM_STRUGGLES_AFFORDABILITY":
+    user.struggles = "affordability";
+    response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
+        {
+        title: i18n.__("mentor_form.counseling"),
+        payload: "MENTORFORM_HELPERS_COUNSELING"
+        },
+        {
+        title: i18n.__("mentor_form.familyfriend"),
+        payload: "MENTORFORM_HELPERS_FAMILYFRIEND"
+        },
+        {
+        title: i18n.__("mentor_form.internet"),
+        payload: "MENTORFORM_HELPERS_INTERNET"
+        },
+        {
+        title: i18n.__("mentor_form.medication"),
+        payload: "MENTORFORM_HELPERS_MEDICATION"
+        }
+    ]);
+    break;
+
+    case "MENTORFORM_STRUGGLES_CONCENTATION":
+    user.struggles = "concentration";
+    response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
+        {
+        title: i18n.__("mentor_form.counseling"),
+        payload: "MENTORFORM_HELPERS_COUNSELING"
+        },
+        {
+        title: i18n.__("mentor_form.familyfriend"),
+        payload: "MENTORFORM_HELPERS_FAMILYFRIEND"
+        },
+        {
+        title: i18n.__("mentor_form.internet"),
+        payload: "MENTORFORM_HELPERS_INTERNET"
+        },
+        {
+        title: i18n.__("mentor_form.medication"),
+        payload: "MENTORFORM_HELPERS_MEDICATION"
+        }
+    ]);
+    break;
+
+    case "MENTORFORM_STRUGGLES_ACCESSIBILITY":
+    user.struggles = "accessibility";
+    response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
+        {
+        title: i18n.__("mentor_form.counseling"),
+        payload: "MENTORFORM_HELPERS_COUNSELING"
+        },
+        {
+        title: i18n.__("mentor_form.familyfriend"),
+        payload: "MENTORFORM_HELPERS_FAMILYFRIEND"
+        },
+        {
+        title: i18n.__("mentor_form.internet"),
+        payload: "MENTORFORM_HELPERS_INTERNET"
+        },
+        {
+        title: i18n.__("mentor_form.medication"),
+        payload: "MENTORFORM_HELPERS_MEDICATION"
+        }
+    ]);
+    break;
+
+    case "MENTORFORM_STRUGGLES_SUPPORT":
+    user.struggles = "support";
+    response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
+        {
+        title: i18n.__("mentor_form.counseling"),
+        payload: "MENTORFORM_HELPERS_COUNSELING"
+        },
+        {
+        title: i18n.__("mentor_form.familyfriend"),
+        payload: "MENTORFORM_HELPERS_FAMILYFRIEND"
+        },
+        {
+        title: i18n.__("mentor_form.internet"),
+        payload: "MENTORFORM_HELPERS_INTERNET"
+        },
+        {
+        title: i18n.__("mentor_form.medication"),
+        payload: "MENTORFORM_HELPERS_MEDICATION"
+        }
+    ]);
+    break;
+
+    // From helpers to end
+    case "MENTORFORM_HELPERS_COUNSELING":
+    user.helpers = "counseling";
+    response = [
+        Response.genText(i18n.__("mentor_form.end1")),
+        Response.genText(i18n.__("mentor_form_.end2")),
+    ];
+    break;
+        
+    case "MENTORFORM_HELPERS_FAMILYFRIEND":
+    user.helpers = "familyfriend";
+    response = [
+        Response.genText(i18n.__("mentor_form.end1")),
+        Response.genText(i18n.__("mentor_form_.end2")),
+    ];
+    break;
+
+    case "MENTORFORM_HELPERS_INTERNET":
+    user.helpers = "internet";
+    response = [
+        Response.genText(i18n.__("mentor_form.end1")),
+        Response.genText(i18n.__("mentor_form_.end2")),
+    ];
+    break;
+
+    case "MENTORFORM_HELPERS_MEDICATION":
+    user.helpers = "medication";
+    response = [
+        Response.genText(i18n.__("mentor_form.end1")),
+        Response.genText(i18n.__("mentor_form_.end2")),
+    ];
+    break;
+        
 
       case "CURATION_OTHER_STYLE":
         // Build the recommendation logic here
