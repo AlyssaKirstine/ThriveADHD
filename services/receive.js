@@ -10,7 +10,7 @@
 
 "use strict";
 
-const Curation = require("./curation"),
+const MentorForm = require("./mentorForm"),
   Order = require("./order"),
   Response = require("./response"),
   Care = require("./care"),
@@ -103,7 +103,7 @@ module.exports = class Receive {
         Response.genQuickReply(i18n.__("get_started.help"), [
           {
             title: i18n.__("menu.mentor"),
-            payload: "CURATION"
+            payload: "MENTORFORM"
           },
           {
             title: i18n.__("menu.mentee"),
@@ -183,9 +183,9 @@ module.exports = class Receive {
       payload === "GITHUB"
     ) {
       response = Response.genNuxMessage(this.user);
-    } else if (payload.includes("CURATION") || payload.includes("COUPON")) {
-      let curation = new Curation(this.user, this.webhookEvent);
-      response = curation.handlePayload(payload);
+    } else if (payload.includes("MENTORFORM") || payload.includes("COUPON")) {
+      let mentorForm = new MentorForm(this.user, this.webhookEvent);
+      response = mentorForm.handlePayload(payload);
     } else if (payload.includes("CARE")) {
       let care = new Care(this.user, this.webhookEvent);
       response = care.handlePayload(payload);
@@ -229,7 +229,7 @@ module.exports = class Receive {
     let response = Response.genQuickReply(welcomeMessage, [
       {
         title: i18n.__("menu.mentor"),
-        payload: "CURATION"
+        payload: "MENTORFORM"
       },
       {
         title: i18n.__("menu.mentee"),
