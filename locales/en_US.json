@@ -22,6 +22,34 @@
     "apply": "Apply discount",
     "coupon": "Added your coupon to this thread, you can now check out the discounted summer collection"
   },
+  "m_form": {
+    "gender":"What gender do you identify as?",
+    "male":"Male",
+    "female":"Female",
+    "age": "What is your age?",
+    "0-14":"0-14",
+    "15-24":"15-24",
+    "25-64":"25-64",
+    "65-":"over 65",
+    "occupation": "What is your occupation?",
+    "student":"Student",
+    "teacher":"Teacher",
+    "engineer":"Engineer",
+    "other":"Other",
+    "struggles":"What have you struggled with?",
+    "affordability":"Affordability",
+    "concentration":"Concentration",
+    "accessibility":"Accessibility",
+    "support":"Support",
+    "helpers":"What has helped you?",
+    "counseling":"Counseling",
+    "family/friend":"Family/friend",
+    "internet":"Internet",
+    "medication":"Medication",
+    "end1":"Thank you for sharing this information. A pal will reach out if you are matched with them",
+    "end2":"In the meantime, feel free to share any resources that have helped you or things you’ve learned that help you cope with ADHD on our Thrive ADHD Community page."
+
+  },
   "curation": {
     "prompt": "Are you looking for an outfit for yourself or someone else?",
     "occasion": "Great! Let's get started. First, is there an occasion in mind?",
@@ -56,6 +84,15 @@
     "style": "Hi {{userFirstName}}, my name is {{agentFirstName}}, I’m here to answer questions you might have on our summer styles",
     "end": "This is as far as the demo goes. Leverage the power of the messenger platform for your business. See https://fb.me/get-sample-oc to learn how to build a similar experience",
     "help": "Help"
+  },
+  "mform_about":{
+    "prompt1":"A pal is is someone who supports  others who struggle with ADHD.",
+    "prompt2":"If you’re matched with a pal, they will be given access to your Facebook profile and message you there.",
+    "prompt3":"Are you okay with this?",
+    "yes":"Yes",
+    "no":"I'd rather share resources in the group.",
+    "positive":"Great! We first need to ask you some questions about yourself to pair you with an appropriate pal.",
+    "negative":"Okay! Feel free to share any resources that have helped you or things you’ve learned that help you cope with ADHD on our Thrive ADHD Community page."
   },
   "survey": {
     "prompt": "Hi, want to get quick feedback on your recent experience with {{agentFirstName}}",
