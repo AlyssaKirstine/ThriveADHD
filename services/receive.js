@@ -88,7 +88,7 @@ module.exports = class Receive {
     } else if (Number(message)) {
       response = Order.handlePayload("ORDER_NUMBER");
     } else if (message.includes("#")) {
-      response = Survey.handlePayload("CSAT_SUGGESTION");
+      response = Survey.handlePayload("CSAT_SUPPORT");
     } else if (message.includes(i18n.__("care.help").toLowerCase())) {
       let care = new Care(this.user, this.webhookEvent);
       response = care.handlePayload("CARE_HELP");
@@ -102,11 +102,11 @@ module.exports = class Receive {
         Response.genText(i18n.__("get_started.guidance")),
         Response.genQuickReply(i18n.__("get_started.help"), [
           {
-            title: i18n.__("menu.suggestion"),
+            title: i18n.__("menu.mentor"),
             payload: "CURATION"
           },
           {
-            title: i18n.__("menu.help"),
+            title: i18n.__("menu.mentee"),
             payload: "CARE_HELP"
           }
         ])
@@ -126,7 +126,7 @@ module.exports = class Receive {
 
     response = Response.genQuickReply(i18n.__("fallback.attachment"), [
       {
-        title: i18n.__("menu.help"),
+        title: i18n.__("menu.mentor"),
         payload: "CARE_HELP"
       },
       {
@@ -228,11 +228,11 @@ module.exports = class Receive {
 
     let response = Response.genQuickReply(welcomeMessage, [
       {
-        title: i18n.__("menu.suggestion"),
+        title: i18n.__("menu.mentor"),
         payload: "CURATION"
       },
       {
-        title: i18n.__("menu.help"),
+        title: i18n.__("menu.mentee"),
         payload: "CARE_HELP"
       }
     ]);

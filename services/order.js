@@ -31,7 +31,7 @@ module.exports = class Order {
             payload: "SEARCH_ORDER"
           },
           {
-            title: i18n.__("menu.help"),
+            title: i18n.__("menu.mentor"),
             payload: "CARE_ORDER"
           }
         ]);
