@@ -19,11 +19,10 @@ module.exports = class MentorForm {
   constructor(user, webhookEvent) {
     this.user = user;
     this.webhookEvent = webhookEvent;
+    this.mentor = { id: user.PSID };
   }
-
   handlePayload(payload) {
     let response;
-    let user = new Object();
 
     switch (payload) {
       case "MENTORFORM":
@@ -66,7 +65,7 @@ module.exports = class MentorForm {
 
       // Gender
       case "MENTORFORM_GENDER_MALE":
-        user.gender = "male";
+        this.mentor.gender = "male";
         response = Response.genQuickReply(i18n.__("mentor_form.age"), [
           {
             title: i18n.__("mentor_form.0-14"),
@@ -88,7 +87,7 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_GENDER_FEMALE":
-        user.gender = "female";
+        mentor.gender = "female";
         response = Response.genQuickReply(i18n.__("mentor_form.age"), [
           {
             title: i18n.__("mentor_form.0-14"),
@@ -111,7 +110,7 @@ module.exports = class MentorForm {
 
       // From age to occupation
       case "MENTORFORM_AGE_0-14":
-        user.age = "0-14";
+        this.mentor.age = "0-14";
         response = Response.genQuickReply(i18n.__("mentor_form.occupation"), [
           {
             title: i18n.__("mentor_form.student"),
@@ -133,7 +132,7 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_AGE_15-24":
-        user.age = "15-24";
+        this.mentor.age = "15-24";
         response = Response.genQuickReply(i18n.__("mentor_form.occupation"), [
           {
             title: i18n.__("mentor_form.student"),
@@ -155,7 +154,7 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_AGE_25-64":
-        user.age = "25-64";
+        this.mentor.age = "25-64";
         response = Response.genQuickReply(i18n.__("mentor_form.occupation"), [
           {
             title: i18n.__("mentor_form.student"),
@@ -177,7 +176,7 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_AGE_65-":
-        user.age = "65-";
+        this.mentor.age = "65-";
         response = Response.genQuickReply(i18n.__("mentor_form.occupation"), [
           {
             title: i18n.__("mentor_form.student"),
@@ -200,7 +199,7 @@ module.exports = class MentorForm {
 
       // From occupation to struggles
       case "MENTORFORM_OCCUPATION_STUDENT":
-        user.occupation = "student";
+        this.mentor.occupation = "student";
         response = Response.genQuickReply(i18n.__("mentor_form.struggles"), [
           {
             title: i18n.__("mentor_form.affordability"),
@@ -222,7 +221,7 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_OCCUPATION_TEACHER":
-        user.occupation = "teacher";
+        this.mentor.occupation = "teacher";
         response = Response.genQuickReply(i18n.__("mentor_form.struggles"), [
           {
             title: i18n.__("mentor_form.affordability"),
@@ -244,7 +243,7 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_OCCUPATION_ENGINEER":
-        user.occupation = "engineer";
+        this.mentor.occupation = "engineer";
         response = Response.genQuickReply(i18n.__("mentor_form.struggles"), [
           {
             title: i18n.__("mentor_form.affordability"),
@@ -266,7 +265,7 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_OCCUPATION_OTHER":
-        user.occupation = "other";
+        this.mentor.occupation = "other";
         response = Response.genQuickReply(i18n.__("mentor_form.struggles"), [
           {
             title: i18n.__("mentor_form.affordability"),
@@ -289,7 +288,7 @@ module.exports = class MentorForm {
 
       // From struggles to helpers
       case "MENTORFORM_STRUGGLES_AFFORDABILITY":
-        user.struggles = "affordability";
+        this.mentor.struggles = "affordability";
         response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
           {
             title: i18n.__("mentor_form.counseling"),
@@ -311,7 +310,7 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_STRUGGLES_CONCENTRATION":
-        user.struggles = "concentration";
+        this.mentor.struggles = "concentration";
         response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
           {
             title: i18n.__("mentor_form.counseling"),
@@ -333,7 +332,7 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_STRUGGLES_ACCESSIBILITY":
-        user.struggles = "accessibility";
+        this.mentor.struggles = "accessibility";
         response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
           {
             title: i18n.__("mentor_form.counseling"),
@@ -355,7 +354,7 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_STRUGGLES_SUPPORT":
-        user.struggles = "support";
+        this.mentor.struggles = "support";
         response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
           {
             title: i18n.__("mentor_form.counseling"),
@@ -378,8 +377,8 @@ module.exports = class MentorForm {
 
       // From helpers to end
       case "MENTORFORM_HELPERS_COUNSELING":
-        user.helpers = "counseling";
-        console.log(user)
+        this.mentor.helpers = "counseling";
+        console.log(this.mentor)
         response = [
           Response.genText(i18n.__("mentor_form.end1")),
           Response.genText(i18n.__("mentor_form.end2")),
@@ -387,8 +386,8 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_HELPERS_FAMILYFRIEND":
-        user.helpers = "familyfriend";
-        console.log(user)
+        this.mentor.helpers = "familyfriend";
+        console.log(this.mentor)
         response = [
           Response.genText(i18n.__("mentor_form.end1")),
           Response.genText(i18n.__("mentor_form.end2")),
@@ -396,8 +395,8 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_HELPERS_INTERNET":
-        user.helpers = "internet";
-        console.log(user)
+        this.mentor.helpers = "internet";
+        console.log(this.mentor)
         response = [
           Response.genText(i18n.__("mentor_form.end1")),
           Response.genText(i18n.__("mentor_form.end2")),
@@ -405,8 +404,8 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_HELPERS_MEDICATION":
-        user.helpers = "medication";
-        console.log(user)
+        this.mentor.helpers = "medication";
+        console.log(this.mentor)
         response = [
           Response.genText(i18n.__("mentor_form.end1")),
           Response.genText(i18n.__("mentor_form.end2")),
@@ -416,7 +415,7 @@ module.exports = class MentorForm {
 
       case "CURATION_OTHER_STYLE":
         // Build the recommendation logic here
-        outfit = `${this.user.gender}-${this.randomOutfit()}`;
+        outfit = `${this.this.mentor.gender}-${this.randomOutfit()}`;
 
         response = Response.genGenericTemplate(
           `${config.appUrl}/styles/${outfit}.jpg`,
@@ -443,7 +442,7 @@ module.exports = class MentorForm {
   genCurationResponse(payload) {
     let occasion = payload.split("_")[3].toLowerCase();
     let budget = payload.split("_")[2].toLowerCase();
-    let outfit = `${this.user.gender}-${occasion}`;
+    let outfit = `${this.this.mentor.gender}-${occasion}`;
 
     let buttons = [
       Response.genWebUrlButton(
