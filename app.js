@@ -38,6 +38,11 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fbsf");
 // Use mentorRoutes
 app.use("/api", mentorRoutes);
 
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
+
 // Parse application/json. Verify that callback came from Facebook
 app.use(json({ verify: verifyRequestSignature }));
 
