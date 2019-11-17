@@ -362,7 +362,9 @@ module.exports = class MenteeForm {
     case "MENTORFORM_HELPERS_FAMILYFRIEND":
     case "MENTORFORM_HELPERS_INTERNET":
     case "MENTORFORM_HELPERS_MEDICATION":
-        response = Response.genGenericTemplate(
+        response = [
+          Response.genText("Thank you for sharing this information. You were matched with the following pal."),
+          Response.genGenericTemplate(
           `https://www.facebook.com/alyssakirstine.m`,
           "Alyssa Melendez",
           "Female",
@@ -376,7 +378,8 @@ module.exports = class MenteeForm {
               "MENTORFORM_HELPERS_COUNSELING"
             )
           ]
-        );
+        ),
+        ];
     break;
         
 
