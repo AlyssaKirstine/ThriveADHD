@@ -6,8 +6,8 @@ const mentorSchema = new Schema({
   age: String,
   gender: String,
   occupation: String,
-  struggles: [],
-  helpers: []
+  struggles: String,
+  helpers: String
 });
 
 const Mentor = mongoose.model("Mentor", mentorSchema);
