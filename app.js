@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Use mentorRoutes
-app.use("/api", mentorRoutes);
+app.use("https://thrive-adhd.herokuapp.com/api", mentorRoutes);
 
 
 
