@@ -357,6 +357,7 @@ module.exports = class MenteeForm {
     break;
 
     // From helpers to end
+    case: "MENTEEFORM":
     case "MENTORFORM_HELPERS_COUNSELING":
     case "MENTORFORM_HELPERS_FAMILYFRIEND":
     case "MENTORFORM_HELPERS_INTERNET":
