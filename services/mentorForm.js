@@ -62,6 +62,7 @@ module.exports = class MentorForm {
 
       case "MENTORFORM_NOPAL":
           response = Response.genText(i18n.__("mentor_form_about.negative"));
+          break;
 
     // Gender
       case "MENTORFORM_GENDER_MALE":
