@@ -379,6 +379,7 @@ module.exports = class MentorForm {
     // From helpers to end
     case "MENTORFORM_HELPERS_COUNSELING":
     user.helpers = "counseling";
+    createMentor();
     response = [
         Response.genText(i18n.__("mentor_form.end1")),
         Response.genText(i18n.__("mentor_form.end2")),
@@ -387,6 +388,7 @@ module.exports = class MentorForm {
         
     case "MENTORFORM_HELPERS_FAMILYFRIEND":
     user.helpers = "familyfriend";
+    createMentor();
     response = [
         Response.genText(i18n.__("mentor_form.end1")),
         Response.genText(i18n.__("mentor_form.end2")),
@@ -395,6 +397,7 @@ module.exports = class MentorForm {
 
     case "MENTORFORM_HELPERS_INTERNET":
     user.helpers = "internet";
+    createMentor();
     response = [
         Response.genText(i18n.__("mentor_form.end1")),
         Response.genText(i18n.__("mentor_form.end2")),
@@ -403,6 +406,7 @@ module.exports = class MentorForm {
 
     case "MENTORFORM_HELPERS_MEDICATION":
     user.helpers = "medication";
+    createMentor();
     response = [
         Response.genText(i18n.__("mentor_form.end1")),
         Response.genText(i18n.__("mentor_form.end2")),
@@ -472,5 +476,9 @@ module.exports = class MentorForm {
     let randomIndex = Math.floor(Math.random() * occasion.length);
 
     return occasion[randomIndex];
+  }
+
+  createMentor() {
+    console.log(user)
   }
 };
