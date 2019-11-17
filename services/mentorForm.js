@@ -13,13 +13,14 @@
 // Imports dependencies
 const Response = require("./response"),
   config = require("./config"),
-  i18n = require("../i18n.config");
+  i18n = require("../i18n.config"),
+  axios = require('axios');
 
 module.exports = class MentorForm {
   constructor(user, webhookEvent) {
     this.user = user;
     this.webhookEvent = webhookEvent;
-    this.mentor = { id: user.PSID };
+    this.mentor = { id: user };
   }
   handlePayload(payload) {
     let response;
@@ -65,7 +66,8 @@ module.exports = class MentorForm {
 
       // Gender
       case "MENTORFORM_GENDER_MALE":
-        this.mentor.gender = "male";
+        console.log('male');
+        axios.post('/api/mentors', { id: 'test', question: 'gender', answer: 'male'});
         response = Response.genQuickReply(i18n.__("mentor_form.age"), [
           {
             title: i18n.__("mentor_form.0-14"),
