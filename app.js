@@ -33,7 +33,7 @@ app.use(
   })
 );
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fbsf");
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fbsf");
 
 // Use mentorRoutes
 app.use("/api", mentorRoutes);
