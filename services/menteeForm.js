@@ -26,7 +26,7 @@ module.exports = class MenteeForm {
     let user;
     
     switch (payload) {
-      case "MENTEEFORM":
+      case "MENTEEFORM1":
         response = [
             Response.genText("A pal is is someone who supports  others who struggle with ADHD."),
             Response.genText("When you’re matched with a pal, you will be given access to their Facebook profile and you can message them there."),
