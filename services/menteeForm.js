@@ -26,7 +26,7 @@ module.exports = class MenteeForm {
     let user;
     
     switch (payload) {
-      case "MENTEEFORM1":
+      case "MENTEEFORM":
         response = [
             Response.genText("A pal is is someone who supports  others who struggle with ADHD."),
             Response.genText("When you’re matched with a pal, you will be given access to their Facebook profile and you can message them there."),
@@ -357,7 +357,6 @@ module.exports = class MenteeForm {
     break;
 
     // From helpers to end
-    case: "MENTEEFORM":
     case "MENTORFORM_HELPERS_COUNSELING":
     case "MENTORFORM_HELPERS_FAMILYFRIEND":
     case "MENTORFORM_HELPERS_INTERNET":
