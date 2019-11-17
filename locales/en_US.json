@@ -28,7 +28,7 @@
     "prompt3":"Are you okay with this?",
     "yes":"Yes",
     "no":"No",
-    "positive":"We first need to ask you some questions about yourself to pair you with an appropriate pal.",
+    "positive":"Great! We first need to ask you some questions about yourself to pair you with an appropriate pal.",
     "negative":"Okay! Feel free to share any resources that have helped you or things you’ve learned that help you cope with ADHD on our Thrive ADHD Community page."
   },
   "mentor_form": {
@@ -57,33 +57,7 @@
     "medication":"Medication",
     "end1":"Thank you for sharing this information. A pal will reach out if you are matched with them",
     "end2":"In the meantime, feel free to share any resources that have helped you or things you’ve learned that help you cope with ADHD on our Thrive ADHD Community page."
-  },
-  "mentee_form": {
-    "prompt": "Are you here because you’re experiencing ADHD symptoms or someone else?",
-    "me": "For me",
-    "someoneElse": "Someone else",
-    "mePrompt": "Great! Lets get started! What would you like to do today?",
-    "findPal": "Find an ADHD pal",
-    "askQuestions": "Ask questions about ADHD",
-    "getHelp": "Get resources and help",
-    "aboutPal1": "A pal is is someone who supports  others who struggle with ADHD.",
-    "aboutPal2": "When you’re matched with a pal, you will be given access to their Facebook profile and you can message them there.",
-    "match": "Thank you for sharing this information. You were matched with the following pal.",
-    "share": "Feel free to share any questions you have on our Thrive ADHD Community page.",
-    "help1": "Great! We can definitely help you with that. Are you looking for online or local help?",
-    "online": "Online",
-    "local": "Local",
-    "onlineResources": "Here are some online resources we found for you.",
-    "localResources": "Here are some local resources we found for you.",
-    "relationship": "What is your relationship to this person? This helps us provide you with help tailored to you.",
-    "child": "Child",
-    "student": "Student",
-    "partner": "Partner",
-    "familyfriend": "Family or Friend",
-    "patient": "Patient",
-    "generalResources": "Here are some resources we found for you.",
-    "readMore": "Read more",
-    "showAnother": "Show me another resource",
+
   },
   "curation": {
     "prompt": "Are you looking for an outfit for yourself or someone else?",
