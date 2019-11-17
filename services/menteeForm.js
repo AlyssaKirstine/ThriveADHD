@@ -28,40 +28,21 @@ module.exports = class MenteeForm {
     switch (payload) {
       case "MENTEEFORM":
         response = [
-            Response.genText(i18n.__("mentor_form_about.prompt1")),
-            Response.genText(i18n.__("mentor_form_about.prompt2")),
-            Response.genQuickReply(i18n.__("mentor_form_about.prompt3"), [
-                {
-                    title: i18n.__("mentor_form_about.yes"),
-                    payload: "MENTORFORM_PAL"
-                  },
-                  {
-                    title: i18n.__("mentor_form_about.no"),
-                    payload: "MENTORFORM_NOPAL"
-                  }
+            Response.genText("A pal is is someone who supports  others who struggle with ADHD."),
+            Response.genText("When you’re matched with a pal, you will be given access to their Facebook profile and you can message them there."),
+            Response.genText("We first need to ask you some questions about yourself to pair you with an appropriate pal."),
+            Response.genQuickReply(i18n.__("mentor_form.gender"), [
+              {
+                title: i18n.__("mentor_form.male"),
+                payload: "MENTORFORM_GENDER_MALE"
+              },
+              {
+                title: i18n.__("mentor_form.female"),
+                payload: "MENTORFORM_GENDER_FEMALE"
+              }
             ])
         ];
         break;
-
-      case "MENTORFORM_PAL":
-          response = [
-            Response.genText(i18n.__("mentor_form_about.positive")),
-            Response.genQuickReply(i18n.__("mentor_form.gender"), [
-                {
-                  title: i18n.__("mentor_form.male"),
-                  payload: "MENTORFORM_GENDER_MALE"
-                },
-                {
-                  title: i18n.__("mentor_form.female"),
-                  payload: "MENTORFORM_GENDER_FEMALE"
-                }
-              ])
-          ];
-        break;
-
-
-      case "MENTORFORM_NOPAL":
-          response = Response.genText(i18n.__("mentor_form_about.negative"));
 
     // Gender
       case "MENTORFORM_GENDER_MALE":
@@ -377,34 +358,26 @@ module.exports = class MenteeForm {
 
     // From helpers to end
     case "MENTORFORM_HELPERS_COUNSELING":
-    user.helpers = "counseling";
-    response = [
-        Response.genText(i18n.__("mentor_form.end1")),
-        Response.genText(i18n.__("mentor_form_.end2")),
-    ];
-    break;
-        
     case "MENTORFORM_HELPERS_FAMILYFRIEND":
-    user.helpers = "familyfriend";
-    response = [
-        Response.genText(i18n.__("mentor_form.end1")),
-        Response.genText(i18n.__("mentor_form_.end2")),
-    ];
-    break;
-
     case "MENTORFORM_HELPERS_INTERNET":
-    user.helpers = "internet";
-    response = [
-        Response.genText(i18n.__("mentor_form.end1")),
-        Response.genText(i18n.__("mentor_form_.end2")),
-    ];
-    break;
-
     case "MENTORFORM_HELPERS_MEDICATION":
-    user.helpers = "medication";
     response = [
-        Response.genText(i18n.__("mentor_form.end1")),
-        Response.genText(i18n.__("mentor_form_.end2")),
+        Response.genText("Thank you for sharing this information. You were matched with the following pal."),
+        Response.genGenericTemplate(
+          `https://www.facebook.com/alyssakirstine.m`,
+          "Alyssa Melendez",
+          "Female",
+          [
+            Response.genWebUrlButton(
+              "Message Alyssa",
+              `https://www.facebook.com/alyssakirstine.m`
+            ),
+            Response.genPostbackButton(
+              "See another pal",
+              "MENTORFORM_HELPERS_COUNSELING"
+            )
+          ]
+        ),
     ];
     break;
         
