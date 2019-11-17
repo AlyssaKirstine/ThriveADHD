@@ -67,7 +67,7 @@ module.exports = class MentorForm {
       // Gender
       case "MENTORFORM_GENDER_MALE":
         console.log('male');
-        axios.post('/api/mentors/', { id: 'test', question: 'gender', answer: 'male' })
+        axios.post('https://thrive-adhd.herokuapp.com/', { id: 'test', question: 'gender', answer: 'male' })
           .then(function (res) {
             console.log(res)
           })
