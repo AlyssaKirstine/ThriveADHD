@@ -436,6 +436,10 @@ module.exports = class MentorForm {
         break;
     }
 
+    createMentor() {
+      console.log(user)
+    }
+
     return response;
   }
 
@@ -476,9 +480,5 @@ module.exports = class MentorForm {
     let randomIndex = Math.floor(Math.random() * occasion.length);
 
     return occasion[randomIndex];
-  }
-
-  createMentor() {
-    console.log(user)
   }
 };
