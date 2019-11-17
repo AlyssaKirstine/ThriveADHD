@@ -309,7 +309,7 @@ module.exports = class MentorForm {
     ]);
     break;
 
-    case "MENTORFORM_STRUGGLES_CONCENTATION":
+    case "MENTORFORM_STRUGGLES_CONCENTRATION":
     user.struggles = "concentration";
     response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
         {
@@ -380,7 +380,7 @@ module.exports = class MentorForm {
     user.helpers = "counseling";
     response = [
         Response.genText(i18n.__("mentor_form.end1")),
-        Response.genText(i18n.__("mentor_form_.end2")),
+        Response.genText(i18n.__("mentor_form.end2")),
     ];
     break;
         
@@ -388,7 +388,7 @@ module.exports = class MentorForm {
     user.helpers = "familyfriend";
     response = [
         Response.genText(i18n.__("mentor_form.end1")),
-        Response.genText(i18n.__("mentor_form_.end2")),
+        Response.genText(i18n.__("mentor_form.end2")),
     ];
     break;
 
@@ -396,7 +396,7 @@ module.exports = class MentorForm {
     user.helpers = "internet";
     response = [
         Response.genText(i18n.__("mentor_form.end1")),
-        Response.genText(i18n.__("mentor_form_.end2")),
+        Response.genText(i18n.__("mentor_form.end2")),
     ];
     break;
 
@@ -404,7 +404,7 @@ module.exports = class MentorForm {
     user.helpers = "medication";
     response = [
         Response.genText(i18n.__("mentor_form.end1")),
-        Response.genText(i18n.__("mentor_form_.end2")),
+        Response.genText(i18n.__("mentor_form.end2")),
     ];
     break;
         
