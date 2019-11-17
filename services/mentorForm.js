@@ -23,7 +23,7 @@ module.exports = class MentorForm {
 
   handlePayload(payload) {
     let response;
-    let user;
+    let user = new Object(); 
     
     switch (payload) {
       case "MENTORFORM":
