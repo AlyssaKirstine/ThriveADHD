@@ -20,10 +20,9 @@ const express = require("express"),
   User = require("./services/user"),
   config = require("./services/config"),
   i18n = require("./i18n.config"),
-  app = express();
-  // app = express(),
-  // mongoose = require('mongoose'),
-  // mentorRoutes = require("./routes/mentorRoutes");
+  app = express(),
+  mongoose = require('mongoose'),
+  mentorRoutes = require("./routes/mentorRoutes");
 
 var users = {};
 
@@ -34,10 +33,16 @@ app.use(
   })
 );
 
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fbsf");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fbsf");
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 // Use mentorRoutes
-// app.use("/api", mentorRoutes);
+app.use("/api", mentorRoutes);
+
+
 
 // Parse application/json. Verify that callback came from Facebook
 app.use(json({ verify: verifyRequestSignature }));

@@ -13,60 +13,67 @@
 // Imports dependencies
 const Response = require("./response"),
   config = require("./config"),
-  i18n = require("../i18n.config");
+  i18n = require("../i18n.config"),
+  axios = require('axios');
 
 module.exports = class MentorForm {
   constructor(user, webhookEvent) {
     this.user = user;
     this.webhookEvent = webhookEvent;
+    this.mentor = { id: user };
   }
-
   handlePayload(payload) {
     let response;
-    let user = new Object(); 
-    
+
     switch (payload) {
       case "MENTORFORM":
         response = [
-            Response.genText(i18n.__("mentor_form_about.prompt1")),
-            Response.genText(i18n.__("mentor_form_about.prompt2")),
-            Response.genQuickReply(i18n.__("mentor_form_about.prompt3"), [
-                {
-                    title: i18n.__("mentor_form_about.yes"),
-                    payload: "MENTORFORM_PAL"
-                  },
-                  {
-                    title: i18n.__("mentor_form_about.no"),
-                    payload: "MENTORFORM_NOPAL"
-                  }
-            ])
+          Response.genText(i18n.__("mentor_form_about.prompt1")),
+          Response.genText(i18n.__("mentor_form_about.prompt2")),
+          Response.genQuickReply(i18n.__("mentor_form_about.prompt3"), [
+            {
+              title: i18n.__("mentor_form_about.yes"),
+              payload: "MENTORFORM_PAL"
+            },
+            {
+              title: i18n.__("mentor_form_about.no"),
+              payload: "MENTORFORM_NOPAL"
+            }
+          ])
         ];
         break;
 
       case "MENTORFORM_PAL":
-          response = [
-            Response.genText(i18n.__("mentor_form_about.positive")),
-            Response.genQuickReply(i18n.__("mentor_form.gender"), [
-                {
-                  title: i18n.__("mentor_form.male"),
-                  payload: "MENTORFORM_GENDER_MALE"
-                },
-                {
-                  title: i18n.__("mentor_form.female"),
-                  payload: "MENTORFORM_GENDER_FEMALE"
-                }
-              ])
-          ];
+        response = [
+          Response.genText(i18n.__("mentor_form_about.positive")),
+          Response.genQuickReply(i18n.__("mentor_form.gender"), [
+            {
+              title: i18n.__("mentor_form.male"),
+              payload: "MENTORFORM_GENDER_MALE"
+            },
+            {
+              title: i18n.__("mentor_form.female"),
+              payload: "MENTORFORM_GENDER_FEMALE"
+            }
+          ])
+        ];
         break;
 
 
       case "MENTORFORM_NOPAL":
-          response = Response.genText(i18n.__("mentor_form_about.negative"));
-          break;
+        response = Response.genText(i18n.__("mentor_form_about.negative"));
+        break;
 
-    // Gender
+      // Gender
       case "MENTORFORM_GENDER_MALE":
-        user.gender = "male";
+        console.log('male');
+        axios.post('/api/mentors/', { id: 'test', question: 'gender', answer: 'male' })
+          .then(function (res) {
+            console.log(res)
+          })
+          .catch(function (e) {
+            console.log(e)
+          });
         response = Response.genQuickReply(i18n.__("mentor_form.age"), [
           {
             title: i18n.__("mentor_form.0-14"),
@@ -88,7 +95,7 @@ module.exports = class MentorForm {
         break;
 
       case "MENTORFORM_GENDER_FEMALE":
-        user.gender = "female";
+        mentor.gender = "female";
         response = Response.genQuickReply(i18n.__("mentor_form.age"), [
           {
             title: i18n.__("mentor_form.0-14"),
@@ -109,9 +116,9 @@ module.exports = class MentorForm {
         ]);
         break;
 
-    // From age to occupation
+      // From age to occupation
       case "MENTORFORM_AGE_0-14":
-        user.age = "0-14";
+        this.mentor.age = "0-14";
         response = Response.genQuickReply(i18n.__("mentor_form.occupation"), [
           {
             title: i18n.__("mentor_form.student"),
@@ -132,8 +139,8 @@ module.exports = class MentorForm {
         ]);
         break;
 
-        case "MENTORFORM_AGE_15-24":
-        user.age = "15-24";
+      case "MENTORFORM_AGE_15-24":
+        this.mentor.age = "15-24";
         response = Response.genQuickReply(i18n.__("mentor_form.occupation"), [
           {
             title: i18n.__("mentor_form.student"),
@@ -154,8 +161,8 @@ module.exports = class MentorForm {
         ]);
         break;
 
-        case "MENTORFORM_AGE_25-64":
-        user.age = "25-64";
+      case "MENTORFORM_AGE_25-64":
+        this.mentor.age = "25-64";
         response = Response.genQuickReply(i18n.__("mentor_form.occupation"), [
           {
             title: i18n.__("mentor_form.student"),
@@ -176,8 +183,8 @@ module.exports = class MentorForm {
         ]);
         break;
 
-        case "MENTORFORM_AGE_65-":
-        user.age = "65-";
+      case "MENTORFORM_AGE_65-":
+        this.mentor.age = "65-";
         response = Response.genQuickReply(i18n.__("mentor_form.occupation"), [
           {
             title: i18n.__("mentor_form.student"),
@@ -198,9 +205,9 @@ module.exports = class MentorForm {
         ]);
         break;
 
-    // From occupation to struggles
+      // From occupation to struggles
       case "MENTORFORM_OCCUPATION_STUDENT":
-        user.occupation = "student";
+        this.mentor.occupation = "student";
         response = Response.genQuickReply(i18n.__("mentor_form.struggles"), [
           {
             title: i18n.__("mentor_form.affordability"),
@@ -221,198 +228,202 @@ module.exports = class MentorForm {
         ]);
         break;
 
-        case "MENTORFORM_OCCUPATION_TEACHER":
-        user.occupation = "teacher";
+      case "MENTORFORM_OCCUPATION_TEACHER":
+        this.mentor.occupation = "teacher";
         response = Response.genQuickReply(i18n.__("mentor_form.struggles"), [
-            {
+          {
             title: i18n.__("mentor_form.affordability"),
             payload: "MENTORFORM_STRUGGLES_AFFORDABILITY"
-            },
-            {
+          },
+          {
             title: i18n.__("mentor_form.concentration"),
             payload: "MENTORFORM_STRUGGLES_CONCENTRATION"
-            },
-            {
+          },
+          {
             title: i18n.__("mentor_form.accessibility"),
             payload: "MENTORFORM_STRUGGLES_ACCESSIBILITY"
-            },
-            {
+          },
+          {
             title: i18n.__("mentor_form.support"),
             payload: "MENTORFORM_STRUGGLES_SUPPORT"
-            }
+          }
         ]);
         break;
 
-        case "MENTORFORM_OCCUPATION_ENGINEER":
-        user.occupation = "engineer";
+      case "MENTORFORM_OCCUPATION_ENGINEER":
+        this.mentor.occupation = "engineer";
         response = Response.genQuickReply(i18n.__("mentor_form.struggles"), [
-            {
+          {
             title: i18n.__("mentor_form.affordability"),
             payload: "MENTORFORM_STRUGGLES_AFFORDABILITY"
-            },
-            {
+          },
+          {
             title: i18n.__("mentor_form.concentration"),
             payload: "MENTORFORM_STRUGGLES_CONCENTRATION"
-            },
-            {
+          },
+          {
             title: i18n.__("mentor_form.accessibility"),
             payload: "MENTORFORM_STRUGGLES_ACCESSIBILITY"
-            },
-            {
+          },
+          {
             title: i18n.__("mentor_form.support"),
             payload: "MENTORFORM_STRUGGLES_SUPPORT"
-            }
+          }
         ]);
         break;
 
-        case "MENTORFORM_OCCUPATION_OTHER":
-        user.occupation = "other";
+      case "MENTORFORM_OCCUPATION_OTHER":
+        this.mentor.occupation = "other";
         response = Response.genQuickReply(i18n.__("mentor_form.struggles"), [
-            {
+          {
             title: i18n.__("mentor_form.affordability"),
             payload: "MENTORFORM_STRUGGLES_AFFORDABILITY"
-            },
-            {
+          },
+          {
             title: i18n.__("mentor_form.concentration"),
             payload: "MENTORFORM_STRUGGLES_CONCENTRATION"
-            },
-            {
+          },
+          {
             title: i18n.__("mentor_form.accessibility"),
             payload: "MENTORFORM_STRUGGLES_ACCESSIBILITY"
-            },
-            {
+          },
+          {
             title: i18n.__("mentor_form.support"),
             payload: "MENTORFORM_STRUGGLES_SUPPORT"
-            }
+          }
         ]);
         break;
 
-    // From struggles to helpers
-    case "MENTORFORM_STRUGGLES_AFFORDABILITY":
-    user.struggles = "affordability";
-    response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
-        {
-        title: i18n.__("mentor_form.counseling"),
-        payload: "MENTORFORM_HELPERS_COUNSELING"
-        },
-        {
-        title: i18n.__("mentor_form.familyfriend"),
-        payload: "MENTORFORM_HELPERS_FAMILYFRIEND"
-        },
-        {
-        title: i18n.__("mentor_form.internet"),
-        payload: "MENTORFORM_HELPERS_INTERNET"
-        },
-        {
-        title: i18n.__("mentor_form.medication"),
-        payload: "MENTORFORM_HELPERS_MEDICATION"
-        }
-    ]);
-    break;
+      // From struggles to helpers
+      case "MENTORFORM_STRUGGLES_AFFORDABILITY":
+        this.mentor.struggles = "affordability";
+        response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
+          {
+            title: i18n.__("mentor_form.counseling"),
+            payload: "MENTORFORM_HELPERS_COUNSELING"
+          },
+          {
+            title: i18n.__("mentor_form.familyfriend"),
+            payload: "MENTORFORM_HELPERS_FAMILYFRIEND"
+          },
+          {
+            title: i18n.__("mentor_form.internet"),
+            payload: "MENTORFORM_HELPERS_INTERNET"
+          },
+          {
+            title: i18n.__("mentor_form.medication"),
+            payload: "MENTORFORM_HELPERS_MEDICATION"
+          }
+        ]);
+        break;
 
-    case "MENTORFORM_STRUGGLES_CONCENTRATION":
-    user.struggles = "concentration";
-    response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
-        {
-        title: i18n.__("mentor_form.counseling"),
-        payload: "MENTORFORM_HELPERS_COUNSELING"
-        },
-        {
-        title: i18n.__("mentor_form.familyfriend"),
-        payload: "MENTORFORM_HELPERS_FAMILYFRIEND"
-        },
-        {
-        title: i18n.__("mentor_form.internet"),
-        payload: "MENTORFORM_HELPERS_INTERNET"
-        },
-        {
-        title: i18n.__("mentor_form.medication"),
-        payload: "MENTORFORM_HELPERS_MEDICATION"
-        }
-    ]);
-    break;
+      case "MENTORFORM_STRUGGLES_CONCENTRATION":
+        this.mentor.struggles = "concentration";
+        response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
+          {
+            title: i18n.__("mentor_form.counseling"),
+            payload: "MENTORFORM_HELPERS_COUNSELING"
+          },
+          {
+            title: i18n.__("mentor_form.familyfriend"),
+            payload: "MENTORFORM_HELPERS_FAMILYFRIEND"
+          },
+          {
+            title: i18n.__("mentor_form.internet"),
+            payload: "MENTORFORM_HELPERS_INTERNET"
+          },
+          {
+            title: i18n.__("mentor_form.medication"),
+            payload: "MENTORFORM_HELPERS_MEDICATION"
+          }
+        ]);
+        break;
 
-    case "MENTORFORM_STRUGGLES_ACCESSIBILITY":
-    user.struggles = "accessibility";
-    response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
-        {
-        title: i18n.__("mentor_form.counseling"),
-        payload: "MENTORFORM_HELPERS_COUNSELING"
-        },
-        {
-        title: i18n.__("mentor_form.familyfriend"),
-        payload: "MENTORFORM_HELPERS_FAMILYFRIEND"
-        },
-        {
-        title: i18n.__("mentor_form.internet"),
-        payload: "MENTORFORM_HELPERS_INTERNET"
-        },
-        {
-        title: i18n.__("mentor_form.medication"),
-        payload: "MENTORFORM_HELPERS_MEDICATION"
-        }
-    ]);
-    break;
+      case "MENTORFORM_STRUGGLES_ACCESSIBILITY":
+        this.mentor.struggles = "accessibility";
+        response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
+          {
+            title: i18n.__("mentor_form.counseling"),
+            payload: "MENTORFORM_HELPERS_COUNSELING"
+          },
+          {
+            title: i18n.__("mentor_form.familyfriend"),
+            payload: "MENTORFORM_HELPERS_FAMILYFRIEND"
+          },
+          {
+            title: i18n.__("mentor_form.internet"),
+            payload: "MENTORFORM_HELPERS_INTERNET"
+          },
+          {
+            title: i18n.__("mentor_form.medication"),
+            payload: "MENTORFORM_HELPERS_MEDICATION"
+          }
+        ]);
+        break;
 
-    case "MENTORFORM_STRUGGLES_SUPPORT":
-    user.struggles = "support";
-    response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
-        {
-        title: i18n.__("mentor_form.counseling"),
-        payload: "MENTORFORM_HELPERS_COUNSELING"
-        },
-        {
-        title: i18n.__("mentor_form.familyfriend"),
-        payload: "MENTORFORM_HELPERS_FAMILYFRIEND"
-        },
-        {
-        title: i18n.__("mentor_form.internet"),
-        payload: "MENTORFORM_HELPERS_INTERNET"
-        },
-        {
-        title: i18n.__("mentor_form.medication"),
-        payload: "MENTORFORM_HELPERS_MEDICATION"
-        }
-    ]);
-    break;
+      case "MENTORFORM_STRUGGLES_SUPPORT":
+        this.mentor.struggles = "support";
+        response = Response.genQuickReply(i18n.__("mentor_form.helpers"), [
+          {
+            title: i18n.__("mentor_form.counseling"),
+            payload: "MENTORFORM_HELPERS_COUNSELING"
+          },
+          {
+            title: i18n.__("mentor_form.familyfriend"),
+            payload: "MENTORFORM_HELPERS_FAMILYFRIEND"
+          },
+          {
+            title: i18n.__("mentor_form.internet"),
+            payload: "MENTORFORM_HELPERS_INTERNET"
+          },
+          {
+            title: i18n.__("mentor_form.medication"),
+            payload: "MENTORFORM_HELPERS_MEDICATION"
+          }
+        ]);
+        break;
 
-    // From helpers to end
-    case "MENTORFORM_HELPERS_COUNSELING":
-    user.helpers = "counseling";
-    response = [
-        Response.genText(i18n.__("mentor_form.end1")),
-        Response.genText(i18n.__("mentor_form.end2")),
-    ];
-    break;
-        
-    case "MENTORFORM_HELPERS_FAMILYFRIEND":
-    user.helpers = "familyfriend";
-    response = [
-        Response.genText(i18n.__("mentor_form.end1")),
-        Response.genText(i18n.__("mentor_form.end2")),
-    ];
-    break;
+      // From helpers to end
+      case "MENTORFORM_HELPERS_COUNSELING":
+        this.mentor.helpers = "counseling";
+        console.log(this.mentor)
+        response = [
+          Response.genText(i18n.__("mentor_form.end1")),
+          Response.genText(i18n.__("mentor_form.end2")),
+        ];
+        break;
 
-    case "MENTORFORM_HELPERS_INTERNET":
-    user.helpers = "internet";
-    response = [
-        Response.genText(i18n.__("mentor_form.end1")),
-        Response.genText(i18n.__("mentor_form.end2")),
-    ];
-    break;
+      case "MENTORFORM_HELPERS_FAMILYFRIEND":
+        this.mentor.helpers = "familyfriend";
+        console.log(this.mentor)
+        response = [
+          Response.genText(i18n.__("mentor_form.end1")),
+          Response.genText(i18n.__("mentor_form.end2")),
+        ];
+        break;
 
-    case "MENTORFORM_HELPERS_MEDICATION":
-    user.helpers = "medication";
-    response = [
-        Response.genText(i18n.__("mentor_form.end1")),
-        Response.genText(i18n.__("mentor_form.end2")),
-    ];
-    break;
-        
+      case "MENTORFORM_HELPERS_INTERNET":
+        this.mentor.helpers = "internet";
+        console.log(this.mentor)
+        response = [
+          Response.genText(i18n.__("mentor_form.end1")),
+          Response.genText(i18n.__("mentor_form.end2")),
+        ];
+        break;
+
+      case "MENTORFORM_HELPERS_MEDICATION":
+        this.mentor.helpers = "medication";
+        console.log(this.mentor)
+        response = [
+          Response.genText(i18n.__("mentor_form.end1")),
+          Response.genText(i18n.__("mentor_form.end2")),
+        ];
+        break;
+
 
       case "CURATION_OTHER_STYLE":
         // Build the recommendation logic here
-        outfit = `${this.user.gender}-${this.randomOutfit()}`;
+        outfit = `${this.this.mentor.gender}-${this.randomOutfit()}`;
 
         response = Response.genGenericTemplate(
           `${config.appUrl}/styles/${outfit}.jpg`,
@@ -433,12 +444,13 @@ module.exports = class MentorForm {
     }
 
     return response;
+
   }
 
   genCurationResponse(payload) {
     let occasion = payload.split("_")[3].toLowerCase();
     let budget = payload.split("_")[2].toLowerCase();
-    let outfit = `${this.user.gender}-${occasion}`;
+    let outfit = `${this.this.mentor.gender}-${occasion}`;
 
     let buttons = [
       Response.genWebUrlButton(
