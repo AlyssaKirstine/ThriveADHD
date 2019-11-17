@@ -35,12 +35,13 @@ app.use(
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fbsf");
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 // Use mentorRoutes
 app.use("/api", mentorRoutes);
 
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
 
 
 // Parse application/json. Verify that callback came from Facebook
