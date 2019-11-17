@@ -362,7 +362,7 @@ module.exports = class MenteeForm {
     case "MENTORFORM_HELPERS_FAMILYFRIEND":
     case "MENTORFORM_HELPERS_INTERNET":
     case "MENTORFORM_HELPERS_MEDICATION":
-        response = Response.genText("Thank you for sharing this information. You were matched with Alyssa Melendez. She is a 21 year old female who struggles with ADHD. She's an engineer. She struggles with concentration and has found help in the Internet. This is the link to her profile: https://www.facebook.com/alyssakirstine.m");
+        response = Response.genText("Thank you for sharing this information. You were matched with Weston Carpenter. He is a 23 year old male who struggles with ADHD. He's an engineer. He struggles with concentration and has found help in the Internet. This is the link to his profile: https://www.facebook.com/weston.carpenter.96");
       break;
         
 
