@@ -67,13 +67,13 @@ module.exports = class MentorForm {
       // Gender
       case "MENTORFORM_GENDER_MALE":
         console.log('male');
-        axios.post('https://thrive-adhd.herokuapp.com/', { id: 'test', question: 'gender', answer: 'male' })
-          .then(function (res) {
-            console.log(res)
-          })
-          .catch(function (e) {
-            console.log(e)
-          });
+        // axios.post('https://thrive-adhd.herokuapp.com/', { id: 'test', question: 'gender', answer: 'male' })
+        //   .then(function (res) {
+        //     console.log(res)
+        //   })
+        //   .catch(function (e) {
+        //     console.log(e)
+        //   });
         response = Response.genQuickReply(i18n.__("mentor_form.age"), [
           {
             title: i18n.__("mentor_form.0-14"),
